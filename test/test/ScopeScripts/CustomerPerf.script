@@ -1,0 +1,12 @@
+#DECLARE PerfInputPath string = "/local/AdsOI/UnifiedLayerPerf/%Y/%m/%d/CustomerPerf.ss?date={0}...{1}"; 
+
+TargetCustomerPerf = 
+    SELECT LogDate,
+           Impressions,
+           Clicks,
+           Math.Round(RevenueUSD, 2) AS Revenue,
+           (Impressions == 0 ? 0 : Math.Round((Clicks * 1.0f / Impressions), 4)) AS CTR,
+           (Clicks == 0 ? 0 : Math.Round((RevenueUSD / Clicks), 2)) AS CPC
+    FROM (SSTREAM @PerfInputPath)
+    WHERE CustomerId == "{2}";
+OUTPUT TargetCustomerPerf TO CONSOLE;

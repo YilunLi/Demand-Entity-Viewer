@@ -1,0 +1,13 @@
+﻿#DECLARE DemandInputPath string = "/local/AdsOI/UnifiedLayerDemand/%Y-%m-%d/AdGroups.ss?date={0}...{1}";
+
+TargetOrderDemand = 
+    SELECT DISTINCT LogDate,
+           CustomerId,
+           AccountId,
+           CampaignId,
+           IsActive,
+           IsEligible,
+           IsServable
+    FROM(SSTREAM @DemandInputPath)
+    WHERE OrderId == {2};
+OUTPUT TargetOrderDemand TO CONSOLE;

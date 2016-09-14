@@ -1,0 +1,11 @@
+﻿// {0}{1}
+#DECLARE CustomerRolePath string = "/local/AdsOI/AppsCIDimensions/CustomerRole.ss";
+RoleMapping =
+    SELECT CustomerId,
+           RoleId
+    FROM
+    (
+        SSTREAM @CustomerRolePath
+    )
+    WHERE CustomerId == {2};
+OUTPUT TO CONSOLE;

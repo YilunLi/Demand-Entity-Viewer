@@ -1,0 +1,8 @@
+Customer	Demand	LogDate$CustomerMarket$CreatedDateTime$CustomerName$ListingNumber$IsActive$IsServable$FinancialStatusId$
+Customer	Perf	LogDate$Impressions$Clicks$Revenue$CTR$CPC$
+Customer	Delta	LogDate$LifeCycleStatusId$FraudStatusId$
+Customer	Role	CustomerId$CustomerRole$
+Order	Demand	LogDate$CustomerId$AccountId$CampaignId$IsActive$IsEligible$IsServable$
+OrderItem	Demand	LogDate$CustomerId$AccountId$CampaignId$OrderId$Keyword$IsActive$IsEligible$IsServable$MatchType$BidAmtUSD$EffectiveEditorialStatusId$
+OrderItem	Perf	LogDate$Impressions$Clicks$Revenue$CTR$CPC$
+OrderItem	Delta	LogDate$LifeCycleStatusId$

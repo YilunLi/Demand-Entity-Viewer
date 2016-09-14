@@ -1,0 +1,6 @@
+CustomerFinancialStatusId
+CustomerLifeCycleStatusId
+CustomerFraudStatusId
+OrderItemMatchType
+OrderItemBidAmtUSD
+OrderItemLifeCycleStatusId

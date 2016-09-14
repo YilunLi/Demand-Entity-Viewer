@@ -1,0 +1,12 @@
+Customer	914
+Account	0
+Campaign	0
+Order	0
+OrderItem	10000008187
+Ad	0
+AdExtension	0
+NKWList	0
+Target	0
+Audiences	0
+UserId	0
+DevToken	0

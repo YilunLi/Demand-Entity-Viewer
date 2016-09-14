@@ -1,0 +1,29 @@
+#DECLARE DeltaInputPath string = "/local/AdsOI/UnifiedLayerDemand/%Y-%m-%d/CustomersDelta.ss?date={0}...{1}";
+#DECLARE DemandInputPath string = "/local/AdsOI/UnifiedLayerDemand/%Y-%m-%d/Customers.ss?date={0}...{1}";
+
+TargetCustomerDelta = 
+    SELECT DISTINCT ModifiedDateTime,
+           LifeCycleStatusId,
+		   FraudStatusId
+    FROM(SSTREAM @DeltaInputPath)
+    WHERE CustomerId == {2};
+	
+TargetCustomerDemand = 
+	SELECT DISTINCT LogDate,
+		   LifeCycleStatusId,
+		   FraudStatusId
+	FROM (SSTREAM @DemandInputPath)
+	WHERE CustomerId == {2};
+
+Data = 
+	SELECT ModifiedDateTime AS LogDate,
+	       LifeCycleStatusId,
+		   FraudStatusId
+	FROM TargetCustomerDelta
+	UNION ALL
+	SELECT LogDate,
+		   LifeCycleStatusId,
+		   FraudStatusId
+	FROM TargetCustomerDemand;
+OUTPUT Data TO CONSOLE;
+	

@@ -1,0 +1,15 @@
+CustomerIsActive	AdvertiserCustomer.LifeCycleStatusId == 11 && AdvertiserCustomer.FraudStatusId == 6 && AdvertiserCustomer.CustomerType != 3 
+CustomerIsServable	Customer_IsActive = True && At least one Listing IsServable == True
+CustomerCustomerRole	0 - N/A, 1 - Advertiser, 2 - Agency, 3 - Sales House
+CustomerFinancialStatusId	14 - Proposals Only, 15 Pending Credit Check, 16 - No Hold, 17 Sold to Only, 18 - Credit Hold, 19 - Credit Warning
+CustomerLifeCycleStatusId	10 - Draft, 11 - Active, 12 - Inactive, 13 - Deleted
+CustomerFraudStatusId	6 - Not Fraud, 7 - Fraud-Pending, 8 - Fraud
+CustomerCTR	Click/Impression
+CustomerCPC	Revenue/Click
+OrderItemIsActive	LifeCycleStatusId == 161 && EffectiveEditorialStatusId in (1,2) 
+OrderItemIsEligible	AdvertiserCustomer_isEligible == True && BillToCustomer_isEligible == True && Account_isEligible == True && Campaign_IsEligible == True && Order_IsEligible = True && Listing IsActive == True
+OrderItemIsServable	Listing_IsEligible == True && CampaignPauseStatusId != 126 (Campaign Budget is not paused)
+OrderItemLifeCycleStatusId	161 - Submitted, 162 - Paused, 163 - Deleted
+OrderItemEffectiveEditorialStatusId	1 - Fully approved for all countries, 2 - Partially approved, 3 - Rejected for a few countries and some are pending, 4 - Fully rejected for all countries 
+OrderItemCTR	Click/Impression
+OrderItemCPC	Revenue/Click

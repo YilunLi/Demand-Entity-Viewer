@@ -1,0 +1,67 @@
+﻿<!DocType html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <title>HomePage</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/jquery.multiselect.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/bootstrap.css" rel="stylesheet" type="text/css" />
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
+    <script src="~/Scripts/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css" />
+    <script type="text/javascript" charset="utf8" src="http://cdn.datatables.net/1.10.12/js/jquery.dataTables.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js"></script>
+    <script src="~/Scripts/knockout-3.4.0.js"></script>
+    <script src="~/Scripts/homepage.js"></script>
+    <script src="~/Scripts/jquery.multiselect.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+</head>
+<body>
+    <div style="margin-top:30px">
+        <div id="side-bar" class="form-horizontal" style="width:20%; height:100%; float:left; background-color:#ddd; position:relative; height:auto !important; height: 600px">
+            <div class="form-group" style="margin-left:15px; margin-top:15px; margin-right:15px">
+                Start Date：<input class="form-control" type="text" id="date_picker1" value="08/14/2016" style="width:90%">
+            </div>
+            <div class="form-group" style="margin-left:15px; margin-top:15px; margin-right:15px">
+                End Date：<input class="form-control" type="text" id="date_picker2" value="08/16/2016" style="width:90%">
+            </div>
+            <div class="form-group" style="margin-left:15px; margin-top:15px; margin-right:15px">
+                Entity Type : <select class="form-control" id="entity_name" data-bind="options:entity_names, value:selected_entity" style="width:90%"></select>
+            </div>
+            <div class="form-group" style="margin-left:15px; margin-top:15px; margin-right:15px">
+                Entity Id : <input class="form-control" type="text" id="entity_id" data-bind="value: default_id" style="width:90%"/>
+            </div>
+            <div class="form-group" style="margin-left:15px; margin-top:15px; margin-right:15px">
+                Metrics : <br />
+                <select class="form-control" id="query" multiple="multiple" data-bind="multiSelectCheck: EntityMappings, selectedOptions:SelectedValue" style="width:80%"></select>
+            </div>
+            <div class="form-group" style="margin-left:15px; margin-top:15px; margin-right:15px">
+                <button class="btn btn-primary" id="search" data-bind="click: SearchQuery, enable: (optional() == true && notsearching)" >Search</button>
+                <span data-bind="visible: optional() == false" style="color:#ff9955">*Will support soon!</span>
+            </div>
+            <div class="form-group" style="margin-left:15px; margin-top:15px; margin-right:15px">
+                <strong>You have selected: </strong>
+                <ul data-bind="foreach: SelectedValue">
+                    <li data-bind="text:$data"></li>
+                </ul>
+            </div>
+        </div>
+        <div id="main-content" class="form-horizontal" style="float:left;background-color:white; height:auto; width:80%">
+            <div id="imgs" style="clear:both;padding-left: 320px;">
+                <img style="margin-top: 80px;margin-left:150px " data-bind="visible: loading" src="~/imgs/peploading.gif" />
+                <br />
+                <img style="margin-top: 80px;" data-bind="visible: ResultNotFound" src="~/imgs/Noresult.png" />
+            </div>
+            <div id="table_container" style="clear:both; margin-top: 10px; text-align: center; width:90%; margin-left:5%">
+            </div>
+            <div id="chart_table_container" style="margin-top: 50px; text-align: center; width:90%; margin-left:5%">
+            </div>
+        </div>
+        
+    </div>
+    
+</body>
+</html>
+

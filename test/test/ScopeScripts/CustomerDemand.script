@@ -1,0 +1,31 @@
+#DECLARE DemandInputPath string = "/local/AdsOI/UnifiedLayerDemand/%Y-%m-%d/Customers.ss?date={0}...{1}";
+#DECLARE MarketMappingPath string = "/local/AdsOI/AppsCIDimensions/Dim_MarketName.ss";
+//#DECLARE CustomerRolePath string = "/local/AdsOI/AppsCIDimensions/CustomerRole.ss";
+MarketMapping = 
+	SELECT MarketId,
+		   MarketName
+	FROM (SSTREAM @MarketMappingPath);
+
+//RoleMapping =
+//    SELECT *
+//    FROM
+//    (
+//        SSTREAM @CustomerRolePath
+//    );
+
+TargetCustomerDemand = 
+    SELECT LogDate,
+		   MarketName,
+		   //MarketId, 
+		   CreatedDateTime.ToString("yyyy-MM-dd") AS CreatedDateTime,
+		   Name,
+           //RoleId AS CustomerRole,
+		   ListingCount,
+		   IsActive,
+		   IsServable,
+           FinancialStatusId
+    FROM (SSTREAM @DemandInputPath) AS A
+	INNER JOIN MarketMapping AS B ON A.MarketId == B.MarketId
+    //INNER JOIN RoleMapping AS C ON A.CustomerId == C.CustomerId
+    WHERE A.CustomerId == {2};
+OUTPUT TargetCustomerDemand TO CONSOLE;

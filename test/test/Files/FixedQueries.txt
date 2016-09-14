@@ -1,0 +1,12 @@
+CustomerCustomerMarket
+CustomerCustomerRole
+CustomerCreatedDateTime
+CustomerCustomerName
+OrderCustomerId
+OrderAccountId
+OrderCampaignId
+OrderItemCustomerId
+OrderItemAccountId
+OrderItemCampaignId
+OrderItemOrderId
+OrderItemKeyword

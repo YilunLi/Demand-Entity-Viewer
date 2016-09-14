@@ -1,0 +1,12 @@
+CustomerListingNumber
+CustomerImpressions
+CustomerClicks
+CustomerRevenue
+CustomerCTR
+CustomerCPC
+OrderItemBidAmtUSD
+OrderItemImpressions
+OrderItemClicks
+OrderItemRevenue
+OrderItemCTR
+OrderItemCPC

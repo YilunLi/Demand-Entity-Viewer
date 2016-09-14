@@ -1,0 +1,24 @@
+#DECLARE DemandInputPath string = "/local/AdsOI/UnifiedLayerDemand/%Y-%m-%d/Listings.ss?date={0}...{1}";
+
+TargetOrderItemDemand = 
+    SELECT DISTINCT LogDate,
+           CustomerId,
+           AccountId,
+           CampaignId,
+           OrderId,
+           Keyword,
+           IsActive,
+           IsEligible,
+           IsServable,
+           (MatchTypeID == 1 ? "ExactMatch" :
+            (MatchTypeID == 2 ? "PhraseMatch" :
+             (MatchTypeID == 3 ? "BroadMatch" :
+              (MatchTypeID == 5 ? "ContentMatch" : "Unknown")))) AS MatchType,
+           (MatchTypeID == 1 ? ((ExactMatchOfferAmt == null || ExactMatchOfferAmt == 0) ? DefaultExactMatchOfferAmt : ExactMatchOfferAmt):
+            (MatchTypeID == 2 ? ((PhraseMatchOfferAmt == null || PhraseMatchOfferAmt == 0) ? DefaultPhraseMatchOfferAmt : PhraseMatchOfferAmt):
+             (MatchTypeID == 3 ? ((BroadMatchOfferAmt == null || BroadMatchOfferAmt == 0) ? DefaultBroadMatchOfferAmt : BroadMatchOfferAmt):
+              (MatchTypeID == 5 ? ((ContentMatchOfferAmt == null || ContentMatchOfferAmt == 0) ? DefaultContentMatchOfferAmt : ContentMatchOfferAmt) : 0)))) AS BidAmtUSD,
+           EffectiveEditorialStatusId
+    FROM(SSTREAM @DemandInputPath)
+    WHERE ListingId == {2};
+            OUTPUT TargetOrderItemDemand TO CONSOLE;

@@ -1,0 +1,25 @@
+#DECLARE DeltaInputPath string = "/local/AdsOI/UnifiedLayerDemand/%Y-%m-%d/ListingsDelta.ss?date={0}...{1}";
+#DECLARE DemandInputPath string = "/local/AdsOI/UnifiedLayerDemand/%Y-%m-%d/Listings.ss?date={0}...{1}";
+
+TargetOrderItemDelta = 
+    SELECT DISTINCT ModifiedDateTime,
+           LifeCycleStatusId
+    FROM(SSTREAM @DeltaInputPath)
+    WHERE OrderItemId == {2};
+	
+TargetOrderItemDemand = 
+	SELECT DISTINCT LogDate,
+		Convert.ToByte(LifeCycleStatusId) AS LifeCycleStatusId
+	FROM (SSTREAM @DemandInputPath)
+	WHERE ListingId == {2};
+
+Data = 
+	SELECT ModifiedDateTime AS LogDate,
+	       LifeCycleStatusId
+	FROM TargetOrderItemDelta
+	UNION ALL
+	SELECT LogDate,
+		   LifeCycleStatusId
+	FROM TargetOrderItemDemand;
+OUTPUT Data TO CONSOLE;
+	
